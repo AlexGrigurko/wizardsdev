@@ -10,7 +10,7 @@ public class Main {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get("https://google.com");
-        driver.quit()
+        driver.quit();
 
     }
 }
