@@ -1,12 +1,9 @@
 import com.wizardsdev.WebApp;
 import com.wizardsdev.driverholder.DriverHolder;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertTrue;
 
@@ -16,7 +13,7 @@ public class GoogleSearchTest {
     private WebApp webApp;
 
     @Before
-    public void before() throws Exception {
+    public void before() {
         System.out.println("Try to open web browser");
         webDriver = DriverHolder.getWebDriver("chrome");
         webDriver.get("https://google.com/");
@@ -28,10 +25,23 @@ public class GoogleSearchTest {
         webApp.googleMainPage().googleSimpleSearch("java");
         assertTrue(webApp.googleResultPage().searchResultItem().getText().contains("java"));
     }
+    @Test
+    public void test2GoogleSearch() throws InterruptedException {
+        webApp.googleMainPage().searchField().sendKeys("java");
+        Thread.sleep(500);
+        webApp.googleMainPage().buttonFind().click();
+        assertTrue(webApp.googleResultPage().searchResultItem().getText().contains("java"));
+    }
 
     @Test
     public void testLuckySerch() throws InterruptedException {
         webApp.googleMainPage().googleLuckySearch("java");
         assertTrue(webDriver.getCurrentUrl().contains("https://www.java.com"));
     }
+
+//    @After
+//    public void shutDown() {
+//        DriverHolder.resetSession(webDriver);
+//    }
+
 }
