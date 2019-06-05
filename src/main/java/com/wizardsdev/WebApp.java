@@ -17,6 +17,6 @@ public class WebApp {
     }
 
     public GoogleResultPage googleResultPage() {
-        return new GoogleResultPage(webdriver);
+        return new  GoogleResultPage(webdriver);
     }
 }

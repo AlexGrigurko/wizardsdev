@@ -1,23 +1,14 @@
-import com.wizardsdev.WebApp;
-import com.wizardsdev.driverholder.DriverHolder;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
+import cucumber.TestBase;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class GoogleSearchTest {
+public class GoogleSearchTest extends TestBase {
 
-    private WebDriver webDriver;
-    private WebApp webApp;
-
-    @Before
+    @BeforeMethod
     public void before() {
-        System.out.println("Try to open web browser");
-        webDriver = DriverHolder.getWebDriver("chrome");
         webDriver.get("https://google.com/");
-        webApp = new WebApp(webDriver);
     }
 
     @Test
@@ -38,10 +29,4 @@ public class GoogleSearchTest {
         webApp.googleMainPage().googleLuckySearch("java");
         assertTrue(webDriver.getCurrentUrl().contains("https://www.java.com"));
     }
-
-//    @After
-//    public void shutDown() {
-//        DriverHolder.resetSession(webDriver);
-//    }
-
 }

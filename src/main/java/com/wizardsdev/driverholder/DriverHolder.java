@@ -16,7 +16,7 @@ public class DriverHolder {
 
         if (driverName.equalsIgnoreCase("chrome")) {
             if (webDriverChrome == null) {
-                WebDriverManager.chromedriver().version("73").setup();
+                WebDriverManager.chromedriver().version("74").setup();
                 webDriverChrome = new ChromeDriver();
             }
             driver = webDriverChrome;
@@ -31,6 +31,10 @@ public class DriverHolder {
     }
 
     public static void resetSession(WebDriver driver) {
-        if (driver != null) { driver.quit();}
+
+        if (driver != null) {
+            driver.quit();
+            webDriverChrome = null;
+        }
     }
 }
