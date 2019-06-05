@@ -1,40 +1,26 @@
 package com.wizardsdev.driverholder;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverHolder {
+    private static WebDriver storedDriver;
+    private static ThreadLocal<WebDriver> storedDriverThreadLocal;
 
-    private static WebDriver webDriverChrome;
-    private static WebDriver webDriverFireFox;
+    public static void setWebDriver(WebDriver driver) {
+        storedDriver = driver;
+    }
 
-    public synchronized static WebDriver getWebDriver(String driverName) {
-
-        WebDriver driver = null;
-
-        if (driverName.equalsIgnoreCase("chrome")) {
-            if (webDriverChrome == null) {
-                WebDriverManager.chromedriver().version("74").setup();
-                webDriverChrome = new ChromeDriver();
-            }
-            driver = webDriverChrome;
-        } else if (driverName.equalsIgnoreCase("firefox")) {
-            if (webDriverFireFox == null) {
-                WebDriverManager.firefoxdriver().setup();
-                webDriverFireFox = new FirefoxDriver();
-            }
-            driver = webDriverFireFox;
+    public synchronized static WebDriver getWebDriver() throws Exception{
+        if (storedDriver == null) {
+            throw new Exception("Driver not set!!!!");
         }
-        return driver;
+        return storedDriver;
     }
 
     public static void resetSession(WebDriver driver) {
-
         if (driver != null) {
-            driver.quit();
-            webDriverChrome = null;
+            storedDriver.quit();
+            storedDriver = null;
         }
     }
 }

@@ -1,10 +1,11 @@
+import cucumber.RunCucumberTests;
 import cucumber.TestBase;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class GoogleSearchTest extends TestBase {
+public class GoogleSearchTest extends RunCucumberTests {
 
     @BeforeMethod
     public void before() {
